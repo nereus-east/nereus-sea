@@ -21,7 +21,7 @@
     * 通过List中的BRPOPLPUSH实现，做到有job立即响应
 3. **消息流转**
     * 结合ZSET + List，同时job元数据存放在hash中，固整个流程如图
-![消息流转图例](https://github.com/nereus-east/nereus-sea/blob/master/redis-blocking-delay-queue/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97.jpg?raw=true)
+![消息流转图例](https://github.com/nereus-east/nereus-sea/blob/master/redis-blocking-delay-queue/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.jpg?raw=true)
 4. **避免轮询**
     * 安排一个线程，单独处理搬运（将job从Waiting搬至Ready），每次搬运已经到期的job
     * 通过wait/notify实现唤醒，服务启动时搬运一次，并peek搬运后Waiting中的队首job，计算wait的时间（即计算下一次搬运的时间）。
@@ -44,6 +44,9 @@
     * a.停止双线程消费 2、停止搬运 3、停止兜底 4、停止retry
     * b.停止内部线程池
     * c.等待内部队列消费完成，等待指定时间&&内部队列为空
+
+#### 简单图示
+![数据流转](https://github.com/nereus-east/nereus-sea/blob/master/redis-blocking-delay-queue/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%EF%BC%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC.jpg?raw=true)
 
 #### 设计优点
 1. 性能好，性能基本上以用户的消费速率决定
