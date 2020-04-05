@@ -1,3 +1,18 @@
+---
+title: 基于redis的延迟、阻塞队列
+date: 2020-4-5 14:33:47
+author: nereus east
+top: true
+mathjax: true
+summary: 基于redis的延迟、阻塞队列
+categories: Markdown
+tags:
+  - Java
+  - 分布式
+  - Redis
+  - 延迟队列
+  - 阻塞队列
+---
 ## 基于redis的延迟、阻塞队列
 
 #### 使用场景
